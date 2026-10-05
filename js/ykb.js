@@ -396,7 +396,13 @@ function validateQuestion(test) {
 // ==================== 保存 ====================
 
 function savejson(test) {
-    var name = OUTPUT_DIR + test.cls + "/" + (test.unit || "") + "/" + test.name + ".json";
+    test.timestamp = getFormattedTimestamp()
+
+    // var name = OUTPUT_DIR + test.cls + "/" + (test.unit || "") + "/" + test.name + ".json";
+
+    // readable filename such as "200-1.json", "200-2.json"
+    var name = OUTPUT_DIR + test.cls + "/" + (test.unit || "") + "/" + test.numb.split('/').reverse().join('-') + ".json";
+
     record = test;
     lastNumb = test.numb;
     lastUnit = test.unit || "";
@@ -404,6 +410,7 @@ function savejson(test) {
     files.createWithDirs(name);
     files.write(name, jsonData, "utf-8");
     console.log("  ✔ 保存成功 " + test.numb);
+
     return jsonData;
 }
 
