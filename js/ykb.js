@@ -73,7 +73,8 @@ function hasNullValue(obj) {
 
 function validateMultiSub(test) {
     if (test == null) return false;
-    if (!test.cls || !test.numb || !test.mode || !test.test) return false;
+    // 有些单选题是以子题形式出现的，这种题缺少 test.test，因此不能用 !test.test 判断
+    if (!test.cls || !test.numb || !test.mode) return false;
     if (!test.sub_questions || test.sub_questions.length === 0) return false;
     for (var i = 0; i < test.sub_questions.length; i++) {
         var sq = test.sub_questions[i];
