@@ -44,15 +44,25 @@ function getTabYRange() {
 }
 
 // ==================== 滑动操作 ====================
+function swipeNext(hRatio) {
+    var sw = device.width;
+    var sh = device.height;
 
-function swipeNextSub() {
-    swipe(1000, 2200, 200, 2200, 150);
+    var centerY = Math.floor(sh * hRatio);
+    var startX = Math.floor(sw * 0.9);
+    var endX = Math.floor(sw * 0.1);
+
+    swipe(startX, centerY, endX, centerY, 150);
+
     sleep(300);
 }
 
+function swipeNextSub() {
+    swipeNext(0.8);
+}
+
 function swipeNextMain() {
-    swipe(1000, 600, 200, 600, 250);
-    sleep(300);
+    swipeNext(0.5);
 }
 
 // ==================== 工具函数 ====================
